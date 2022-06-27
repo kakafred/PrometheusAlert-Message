@@ -10,6 +10,7 @@ wget https://github.com/kakafred/PrometheusAlert-Message/archive/refs/heads/main
 ```
 
 2. You can copy the code into your **PrometheusAlert** MessageDemo template.
+
 Only **Feishu template** is supported now. You can get more other media template at > [Template Sharing Board](https://github.com/feiyu563/PrometheusAlert/issues/30)
 
 
