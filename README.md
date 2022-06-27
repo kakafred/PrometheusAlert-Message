@@ -8,8 +8,8 @@ wget https://github.com/kakafred/PrometheusAlert-Message/archive/refs/heads/main
 ```
 
 2. You can copy the code into your **PrometheusAlert** MessageDemo template.
-Only **Feishu template** is supported now. You can get more other media template at > *[Template Sharing Board](https://github.com/feiyu563/PrometheusAlert/issues/30)
+Only **Feishu template** is supported now. You can get more other media template at > [Template Sharing Board](https://github.com/feiyu563/PrometheusAlert/issues/30)
 
-*🔗 Prometheus Webiste Link* > [Prometheus Web](https://prometheus.io/) 
-*🔗 Prometheus Project Github Link* > [Prometheus](https://github.com/prometheus/prometheus)
+*🔗 Prometheus Webiste Link* > [Prometheus Web](https://prometheus.io/) \n
+*🔗 Prometheus Project Github Link* > [Prometheus](https://github.com/prometheus/prometheus) \n
 *🔗 PrometheusAlert Project Github Link* > [PrometheusAlert](https://github.com/feiyu563/PrometheusAlert)
