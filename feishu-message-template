@@ -24,4 +24,4 @@
 {{ $v.annotations.summary }}
 {{ $v.annotations.description }}
 
-🚨 [alertmanager](https://alertmanager.oncloud-ai.com/) | 📡  [prometheus](https://prometheus.oncloud-ai.com) | 📈  [grafana](https://grafana.oncloud-ai.com/){{end}}{{  end  }}
+🚨 [alertmanager](alertmanager.com) | 📡  [prometheus](prometheus.com) | 📈  [grafana](grafana.com){{end}}{{  end  }}
