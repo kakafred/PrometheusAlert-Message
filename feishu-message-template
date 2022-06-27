@@ -1,0 +1,27 @@
+{{ $var := .externalURL}}{{ range $k,$v:=.alerts }}
+{{- if eq $v.status "resolved"}}**{{$v.labels.alertname}}** 🌤 {{$v.status}}
+
+🕒 **Start at**：      {{ GetCSTtime $v.startsAt }} 
+🕓 **End at**：        {{ GetCSTtime $v.endsAt }}
+🏷️ **Alert Level**：{{ $v.labels.severity }}
+🔗 **Link Info**：    {{ $v.labels.instance }}
+
+📝 **Alert Detail**：
+{{ $v.annotations.summary }}
+{{ $v.annotations.description }}
+
+🚨 [alertmanager](https://alertmanager.oncloud-ai.com/) | 📡  [prometheus](https://prometheus.oncloud-ai.com) | 📈  [grafana](https://grafana.oncloud-ai.com/){{else}}{{if eq $v.labels.severity "warning"}}**{{$v.labels.alertname}}** 🌧 {{$v.status}}
+
+🏷️ **Alert Level**：{{ $v.labels.severity }}{{ else if eq $v.labels.severity "critical"  }}**{{$v.labels.alertname}}**🌩🌩 {{$v.status}}
+
+🏷️ **Alert Level**：{{ $v.labels.severity }}{{ else if eq $v.labels.severity "emergency"  }}**{{ $v.labels.alertname }}**⛈⛈⛈ {{$v.status}}
+
+🏷️ **Alert Level**：{{ $v.labels.severity }}{{end}}
+🕒 **Start at**：      {{ GetCSTtime $v.startsAt }} 
+🔗 **Link Info**：   {{ $v.labels.instance }}
+
+📝 **Alert Detail**：
+{{ $v.annotations.summary }}
+{{ $v.annotations.description }}
+
+🚨 [alertmanager](https://alertmanager.oncloud-ai.com/) | 📡  [prometheus](https://prometheus.oncloud-ai.com) | 📈  [grafana](https://grafana.oncloud-ai.com/){{end}}{{  end  }}
