@@ -10,7 +10,7 @@
 {{ $v.annotations.summary }}
 {{ $v.annotations.description }}
 
-🚨 [alertmanager](https://alertmanager.oncloud-ai.com/) | 📡  [prometheus](https://prometheus.oncloud-ai.com) | 📈  [grafana](https://grafana.oncloud-ai.com/){{else}}{{if eq $v.labels.severity "warning"}}**{{$v.labels.alertname}}** 🌧 {{$v.status}}
+🚨 [alertmanager](link url) | 📡  [prometheus](link url) | 📈  [grafana](link url){{else}}{{if eq $v.labels.severity "warning"}}**{{$v.labels.alertname}}** 🌧 {{$v.status}}
 
 🏷️ **Alert Level**：{{ $v.labels.severity }}{{ else if eq $v.labels.severity "critical"  }}**{{$v.labels.alertname}}**🌩🌩 {{$v.status}}
 
@@ -24,4 +24,4 @@
 {{ $v.annotations.summary }}
 {{ $v.annotations.description }}
 
-🚨 [alertmanager](alertmanager.com) | 📡  [prometheus](prometheus.com) | 📈  [grafana](grafana.com){{end}}{{  end  }}
+🚨 [alertmanager](link url) | 📡  [prometheus](link url) | 📈  [grafana](link url){{end}}{{  end  }}
