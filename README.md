@@ -15,9 +15,8 @@ wget https://github.com/kakafred/PrometheusAlert-Message/archive/refs/heads/main
 
 ### 3. 解释消息模版如何工作
 
-飞书消息卡片标题变更需要对PrometheusAlert目录下conf中的配置文件**app.conf**进行编辑，对文件中**title**进行设置以实现卡片标题内容的输出。
 ![app.conf](https://user-images.githubusercontent.com/82210954/190304127-e60c3961-12d8-44e9-a576-5e1e4c1877ae.png)
-
+飞书消息卡片标题变更需要对PrometheusAlert目录下conf中的配置文件**app.conf**进行编辑，对文件中**title**进行设置以实现卡片标题内容的输出。
 
 ![Lark message template v2](https://user-images.githubusercontent.com/82210954/190294297-8eb3e6dc-7386-4d7c-83d5-3c8c90ecac2d.jpeg)
 
