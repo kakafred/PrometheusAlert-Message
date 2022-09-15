@@ -15,10 +15,14 @@ wget https://github.com/kakafred/PrometheusAlert-Message/archive/refs/heads/main
 
 ### 3. 解释消息模版如何工作
 
+飞书消息卡片标题变更需要对PrometheusAlert目录下conf中的配置文件**app.conf**进行编辑，对文件中**title**进行设置以实现卡片标题内容的输出。
+![app.conf](https://user-images.githubusercontent.com/82210954/190304127-e60c3961-12d8-44e9-a576-5e1e4c1877ae.png)
+
+
 ![Lark message template v2](https://user-images.githubusercontent.com/82210954/190294297-8eb3e6dc-7386-4d7c-83d5-3c8c90ecac2d.jpeg)
 
 #### **🔴 红色部分**
-此部分控制着告警名称与状态的判断和输出，以实现[飞书](https://www.larksuite.com/)消息模版颜色的变更.
+此部分控制着告警名称与状态的判断和输出，以实现[飞书](https://www.larksuite.com/)消息卡片颜色的变更.
 ```shell
 // 飞书代码
 	var color string
@@ -31,7 +35,7 @@ wget https://github.com/kakafred/PrometheusAlert-Message/archive/refs/heads/main
 	}
 ```
 以上代码出处为[点我查看](https://github.com/feiyu563/PrometheusAlert/issues/30#issuecomment-990722433)
-如果告警状态为"resolved"，则上述代码会判断并将模版颜色设置为绿色，根据代码以实现其他不同颜色的变换.
+如果告警状态为"resolved"，则上述代码会判断并将卡片颜色设置为绿色，根据代码以实现其他不同颜色的变换.
 #### **🟡 黄色部分**
 此部分控制alertmanager **Labels**标签值的接收以及输出，详细解释可参考Prometheus Label.
 #### **🟢 绿色部分**
