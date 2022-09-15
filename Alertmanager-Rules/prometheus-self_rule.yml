@@ -1,3 +1,4 @@
+# # #
 groups:
 - name: Prometheus核心服务告警
   rules:
@@ -126,3 +127,4 @@ groups:
     annotations:
       summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务目标抓取冲突
       description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务目标抓取重复引发数据被拒绝造成丢弃，有{{ $value }}个时间序列被你弄丢了..."
+  # # #
