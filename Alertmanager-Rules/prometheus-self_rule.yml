@@ -1,0 +1,128 @@
+groups:
+- name: Prometheus核心服务告警
+  rules:
+  - alert: Prometheus核心服务离线
+    expr: absent(up{job="prometheus"})
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      title: Prometheu核心服务告警
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务离线
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务离线中..."
+  - alert: Prometheus核心组件服务离线
+    expr: up == 0
+    for: 0m
+    annotations:
+      title: Prometheu核心服务告警
+      summary: 📍 Prometheus核心组件服务「{{ $labels.job }}」离线
+      description: '终端节点「{{ $labels.instance }}」的Prometheus核心组件服务「{{ $labels.job }}」离线中...'
+    labels:
+      severity: 'critical'
+  - alert: Prometheus核心服务预加载超时
+    expr: sum by (instance, job) ((up == 0) * on (instance) group_right(job) (node_time_seconds - node_boot_time_seconds > 60))
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      title: Prometheu核心服务告警
+      summary: 📍 Prometheus核心服务「{{ $labels.job }}」 预加载超时
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务「{{ $labels.job }}」预加载超时一分钟了..."
+  - alert: Prometheus核心服务重载失败
+    expr: prometheus_config_last_reload_successful != 1
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      title: Prometheu核心服务告警
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务重载失败
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务重载失败了..."
+  - alert: Prometheus核心服务重启过量
+    expr: changes(process_start_time_seconds{job=~"prometheus|pushgateway|alertmanager"}[15m]) > 10
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      title: Prometheu核心服务告警
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务重启过量
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务已经过量重启{{ $value }}次了..."
+  - alert: Prometheus核心组件服务Alertmanager丢失
+    expr: absent(up{job="alertmanager"})
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务Alertmanager丢失
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务Alertmanager丢失中..."
+  - alert: Prometheus连接Alertmanager失败
+    expr: prometheus_notifications_alertmanagers_discovered < 1
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus连接Alertmanager失败
+      description: "终端节点「{{ $labels.instance }}」的Prometheus连接Alertmanager失败了一次又一次..."
+  - alert: 核心组件服务Alertmanage载入规则失败
+    expr: increase(prometheus_rule_evaluation_failures_total[3m]) > 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: 📍 终端节点「{{ $labels.instance }}」的核心组件服务Alertmanager载入规则失败
+      description: "终端节点「{{ $labels.instance }}」的核心组件服务Alertmanager载入配置文件中的{{ $value }}个规则失败了..."
+  - alert: Prometheus核心服务模版扩展失败
+    expr: increase(prometheus_template_text_expansion_failures_total[3m]) > 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务模版扩展失败
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务的{{ $value }}个模版扩展失败"
+  - alert: Prometheus核心服务载入规则超时
+    expr: prometheus_rule_group_last_duration_seconds > prometheus_rule_group_interval_seconds
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务载入规则超时
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务载入规则用时超过了Prometheus核心服务scheduled时间..."
+  - alert: Prometheus核心服务通知队列积压
+    expr: min_over_time(prometheus_notifications_queue_length[10m]) > 0
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务通知队列形成积压
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务通知队列已经10分钟没有空闲下来了，队列长度为{{ $value }}..."
+  - alert: Prometheus核心组件服务Alertmanager消息推送失败
+    expr: rate(alertmanager_notifications_failed_total[1m]) > 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心组件服务Alertmanager消息推送失败
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心组件服务Alertmanager已经有{{ $value }}条消息推送失败了..."
+  - alert: Prometheus核心服务目标抓取缓慢
+    expr: prometheus_target_interval_length_seconds{quantile="0.9"} / on (interval, instance, job) prometheus_target_interval_length_seconds{quantile="0.5"} > 1.05
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务目标抓取缓慢
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务目标抓取用时太长，数据呈现慢的还不如不看..."
+  - alert: Prometheus核心服务Scrape加载过量
+    expr: increase(prometheus_target_scrapes_exceeded_sample_limit_total[10m]) > 10
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务Scrape加载过量
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务加载了{{ $value }}个Scrape配置，已经超出限制了..."
+  - alert: Prometheus核心服务目标抓取冲突
+    expr: increase(prometheus_target_scrapes_sample_duplicate_timestamp_total[5m]) > 0
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: 📍 终端节点「{{ $labels.instance }}」的Prometheus核心服务目标抓取冲突
+      description: "终端节点「{{ $labels.instance }}」的Prometheus核心服务目标抓取重复引发数据被拒绝造成丢弃，有{{ $value }}个时间序列被你弄丢了..."
