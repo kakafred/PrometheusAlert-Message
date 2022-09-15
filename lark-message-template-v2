@@ -1,0 +1,18 @@
+{{ $var := .externalURL}}{{ range $k,$v:=.alerts }}{{if eq $v.status "resolved"}}**{{$v.labels.alertname}}** 🌤  {{$v.status}}
+
+⛩  **Alert Level**：{{$v.labels.severity}} 
+🧭  **Start Time**：{{TimeFormat $v.startsAt "2006-01-02 15:04:05"}}
+🧭  **End Time**：{{TimeFormat $v.endsAt "2006-01-02 15:04:05"}} 
+
+📜  **Alert Details**：
+{{$v.annotations.summary}}
+{{$v.annotations.description}}{{else}}**{{$v.labels.alertname}}** ⛈  {{$v.status}}
+
+⛩  **Alert Level**：{{$v.labels.severity}} 
+🧭  **Start Time**：{{TimeFormat $v.startsAt "2006-01-02 15:04:05"}}
+
+📜  **Alert Details**：
+{{$v.annotations.summary}}
+{{$v.annotations.description}}{{end}}{{ end }}
+{{ $urimsg:=""}}{{ range $key,$value:=.commonLabels }}{{$urimsg =  print $urimsg $key "%3D%22" $value "%22%2C" }}{{end}}
+[💠  Silence](<your alertmanager domain>/#/silences/new?filter=%7B{{SplitString $urimsg 0 -3}}%7D)
