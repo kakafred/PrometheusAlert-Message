@@ -22,3 +22,5 @@ wget https://github.com/kakafred/PrometheusAlert-Message/archive/refs/heads/main
 *🔗 Prometheus Project Github Link* > [Prometheus](https://github.com/prometheus/prometheus) 
 
 *🔗 PrometheusAlert Project Github Link* > [PrometheusAlert](https://github.com/feiyu563/PrometheusAlert)
+
+*🔗 Awesome Prometheus Alerts Link*> [Alertmanager Rules](https://awesome-prometheus-alerts.grep.to/)
